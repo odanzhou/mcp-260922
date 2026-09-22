@@ -4,6 +4,7 @@ packages:
 
 # 全局统一版本目录
 catalog:
+  prettier: ^3.9.6,
   # react: ^18.3.1
   # react-dom: ^18.3.1
   # typescript: ^5.5.0
