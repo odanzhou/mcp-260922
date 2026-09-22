@@ -4,6 +4,8 @@
 ### 整体架构
 turborepo、pnpm、vite、typescript
 
+### 生成配置
+
 
 ### pnpm catalog
 做统一的版本管理
