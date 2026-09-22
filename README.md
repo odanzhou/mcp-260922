@@ -14,6 +14,27 @@ turborepo、pnpm、vite、typescript
 pnpm add -w -D turbo husky prettier
 // -w 是小写不是大写
 
+### 遇到的一些问题
+#### pnpm i 报错
+macbook m1 pro 27 版本
+Cannot run @pnpm/exe@11.25.0 on this host: it ships no native binary for darwin-x64.
+[Corepack 新一代 Node.js 包管理器](https://zhuanlan.zhihu.com/p/10844568867)
+查看node的架构 node -p "process.arch" // arm64 或 x64（我电脑应该返回 arm64）
+##### 处理
+
+1. 先删除老版本
+
+2. 指定 --arch arm64 安装最新的 LTS 版本的 Node.js
+fnm install --arch arm64 lts/latest
+
+3. 设置为默认版本
+fnm use lts/latest
+fnm default lts/latest
+
+4. 重新安装pnpm
+npm install -g pnpm@latest
+
+
 ### TODO
 
 #### 企业级加速：配置远程缓存（Remote Caching）
