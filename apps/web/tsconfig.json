@@ -4,9 +4,12 @@
     "plugins": [
       {
         "name": "next"
-      }
+      },
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@/*": ["./src/*"] // 保证 import { Button } from "@/components/button" 正确指向 src/components
+    }
   },
   "include": [
     "**/*.ts",
