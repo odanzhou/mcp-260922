@@ -6,6 +6,11 @@ on:
     branches:
       - main
 
+# 新增：并发控制（同分支新构建触发时，自动取消正在进行的旧构建）
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
