@@ -13,11 +13,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+        name: 安装 pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: '11.25.0' # 指定 pnpm 版本，建议与本地使用的版本保持一致
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24.21.0' # 选择适合的 Node.js 版本
+          cache: 'pnpm' # 自动基于 pnpm-lock.yaml 启用依赖缓存
       
       - name: Install dependencies
         run: pnpm install
