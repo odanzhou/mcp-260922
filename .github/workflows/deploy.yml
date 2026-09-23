@@ -20,10 +20,10 @@ jobs:
           node-version: '24.21.0' # 选择适合的 Node.js 版本
       
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       
       - name: Build project
-        run: npm run build
+        run: pnpm run build
       
       - name: Deploy to EdgeOne Makers
         run: npx edgeone makers deploy <outputDirectory> -n <projectName> -t ${{ secrets.EDGEONE_API_TOKEN }} [-e <env>]
