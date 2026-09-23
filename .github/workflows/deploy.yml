@@ -36,21 +36,24 @@ jobs:
       - name: Build project
         run: npm run build:web
       
-      # # 使用密码将打包好的文件通过 SCP 上传到服务器
-      # - name: Upload dist to Server via Rsync
-      #   uses: easingthemes/ssh-deploy@main
-      #   with:
-      #     host: ${{ secrets.SERVER_HOST }}
-      #     username: ${{ secrets.LOGIN_NAME }}
-      #     password: ${{ secrets.LOGIN_PASSWORD }}
-      #     source: "dist/web/*"                  # 本地要上传的文件夹路径
-      #     target: "/var/www/${{ secrets.SERVER_NAME }}"         # 服务器上的目标目录
-      #     strip_components: 1               # 过滤掉顶层的 "dist/" 文件夹，直接将内容解压到 target 目录
-      #     rm: true                          # 类似 --delete，上传前自动清空目标目录下的旧文件
+      # 使用密码将打包好的文件通过 SCP 上传到服务器
+      - name: Upload dist to Server via SCP
+        if: ${{ vars.DEPLOY_MODE == 'scp' }}
+        uses: easingthemes/ssh-deploy@main
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.LOGIN_NAME }}
+          password: ${{ secrets.LOGIN_PASSWORD }}
+          source: "dist/web/*"                  # 本地要上传的文件夹路径
+          target: "/var/www/${{ secrets.SERVER_NAME }}"         # 服务器上的目标目录
+          strip_components: 1               # 过滤掉顶层的 "dist/" 文件夹，直接将内容解压到 target 目录
+          rm: true                          # 类似 --delete，上传前自动清空目标目录下的旧文件
+          debug: true                       # 👈 新增：开启调试打印，逐行输出传输文件明细
 
     
       # 替换原有的 SCP 步骤：使用 sshpass + rsync 极速增量传输（支持密码登录）
-      - name: Deploy dist to Server via Rsync (Password)
+      - name: Deploy dist to Server via Rsync
+        if: ${{ vars.DEPLOY_MODE !== 'csp' }} # 默认模式
         env:
           HOST: ${{ secrets.SERVER_HOST }}
           USER: ${{ secrets.LOGIN_NAME }}
@@ -65,7 +68,7 @@ jobs:
           # -v: 显示详细日志
           # -z: 传输时压缩数据（大幅缩短跨国传输时间）
           # --delete: 删除服务器目标目录中多余的旧文件（保持与 dist 绝对一致）
-          sshpass -p "$PASS" rsync -avz --delete \
+          sshpass -p "$PASS" rsync -avz --info=progress2 --delete \
             -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             dist/web/ "$USER@$HOST:$TARGET/"
       
