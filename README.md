@@ -34,6 +34,11 @@ fnm default lts/latest
 4. 重新安装pnpm
 npm install -g pnpm@latest
 
+### 把一些软件下载到公共区域，而不是某个用户下
+如 nvm
+sudo mkdir -p /usr/local/nvm
+sudo NVM_DIR=/usr/local/nvm bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh)"
+
 
 ### TODO
 
