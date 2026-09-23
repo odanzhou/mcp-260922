@@ -48,3 +48,27 @@ a {
     display: unset;
   }
 }
+
+.layout-page {
+  display: flex;
+  flex-direction: column;
+  
+  .page-nav {
+    height: 60px;
+  }
+
+  .page-content {
+    height: calc(100dvh - 60px);
+    display: flex;
+    padding: 20px;
+    .page-menu {
+      flex: 0 0 auto;
+      width: 200px;
+    }
+    .page-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+  
+}

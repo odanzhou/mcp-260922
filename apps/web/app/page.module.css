@@ -10,10 +10,10 @@
   grid-template-rows: 20px 1fr 20px;
   align-items: center;
   justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
+  height: 100%;
   gap: 64px;
   font-synthesis: none;
+  overflow: auto;
 }
 
 @media (prefers-color-scheme: dark) {
