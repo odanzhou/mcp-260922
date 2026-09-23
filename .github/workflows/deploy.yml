@@ -53,7 +53,7 @@ jobs:
     
       # 替换原有的 SCP 步骤：使用 sshpass + rsync 极速增量传输（支持密码登录）
       - name: Deploy dist to Server via Rsync
-        if: ${{ vars.DEPLOY_MODE !== 'csp' }} # 默认模式
+        if: ${{ vars.DEPLOY_MODE != 'csp' }} # 默认模式
         env:
           HOST: ${{ secrets.SERVER_HOST }}
           USER: ${{ secrets.LOGIN_NAME }}
