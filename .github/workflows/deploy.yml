@@ -29,7 +29,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Build project
-        run: pnpm run build
+        run: npm run build:web
       
       # 使用密码将打包好的文件通过 SCP 上传到服务器
       - name: Upload dist to Server via Password
@@ -38,7 +38,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.LOGIN_NAME }}
           password: ${{ secrets.LOGIN_PASSWORD }}
-          source: "dist/*"                  # 本地要上传的文件夹路径
+          source: "dist/web/*"                  # 本地要上传的文件夹路径
           target: "/var/www/${{ secrets.SERVER_NAME }}"         # 服务器上的目标目录
           strip_components: 1               # 过滤掉顶层的 "dist/" 文件夹，直接将内容解压到 target 目录
           rm: true                          # 类似 --delete，上传前自动清空目标目录下的旧文件
