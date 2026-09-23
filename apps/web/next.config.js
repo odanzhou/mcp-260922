@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: 'dist', // 将打包目录设置为 dist
+  // 将 build 输出路径指向根目录下的 dist-web
+  distDir: 'dist',
+  emptyOutDir: true,
 };
 
 export default nextConfig;
