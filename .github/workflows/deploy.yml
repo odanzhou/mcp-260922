@@ -71,7 +71,7 @@ jobs:
           # --delete: 删除服务器目标目录中多余的旧文件（保持与 dist 绝对一致）
           sshpass -p "$PASS" rsync -avz --info=progress2 --delete \
             -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            dist/web/ "$USER@$HOST:$TARGET/"
+            dist/ "$USER@$HOST:$TARGET/"
       
       # 新增步骤：通过 SSH 重载/重启 Nginx
       - name: Reload Nginx Server
