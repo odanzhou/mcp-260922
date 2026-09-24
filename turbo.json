@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       // 👈 核心修复：添加 .next/** 和 public 静态资源目录
-      "outputs": ["../dist/**", "!../dist/web/cache/**", "../../public/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "public/**", "!.next/dev/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

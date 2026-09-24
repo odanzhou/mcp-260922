@@ -44,7 +44,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.LOGIN_NAME }}
           password: ${{ secrets.LOGIN_PASSWORD }}
-          source: "dist/web/*"                  # 本地要上传的文件夹路径
+          source: "apps/web/.next/*"               # 本地要上传的文件夹路径
           target: "/var/www/${{ secrets.SERVER_NAME }}"         # 服务器上的目标目录
           strip_components: 1               # 过滤掉顶层的 "dist/" 文件夹，直接将内容解压到 target 目录
           rm: true                          # 类似 --delete，上传前自动清空目标目录下的旧文件
